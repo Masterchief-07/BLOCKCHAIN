@@ -1,8 +1,8 @@
 #include "BlockChain.hpp"
 
-BlockCHain::BlockCHain()
+BlockChain::BlockChain()
 {
-	block genesis = CreateGenesisBlock();
+	Block genesis = CreateGenesisBlock();
 	chain.push_back(genesis);
 }
 
@@ -15,8 +15,8 @@ Block BlockChain::CreateGenesisBlock()
 	data.senderKey = "None";
 	data.timestamp = time(&current);
 
-	hash<int> hash1;
-	block genesis(0, d, hash1(0));
+	std::hash<int> hash1;
+	Block genesis(0, data, hash1(0));
 	return genesis;
 }
 
@@ -25,25 +25,25 @@ Block *BlockChain::GetLatestBlock() { return &chain.back(); }
 void BlockChain::AddBlock(Transaction d)
 {
 	int index = (int)chain.size() - 1;
-	Block newBlock(index, d, getLatestBlock()->getHash());
-	if(newBlock.IsValid())
+	Block newBlock(index, d, GetLatestBlock()->GetHash());
+	if(newBlock.Is_Valid())
 		chain.push_back(newBlock);
 }
 
-bool BlockChain::isChainValid()
+bool BlockChain::IsChainValid()
 {
-	int chainLen = (int) chain.size();
+	int chainlen = (int) chain.size();
 	for(auto it = chain.begin(); it!= chain.end(); ++it)
 	{
 		Block currentBlock = *it;
-		if(!it->isHashValid())
-			return false
+		if(!it->Is_Valid())
+			return false;
 
-		if(chain>1)
+		if(chainlen>1)
 		{
 			Block previousBlock = *(it-1);
 			if(currentBlock.GetPreviousHash() != previousBlock.GetHash())
-				return false
+				return false;
 
 		}
 	}

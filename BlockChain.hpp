@@ -13,7 +13,7 @@ class BlockChain
 		BlockChain();
 
 		void AddBlock(Transaction Data);
-		void IsChainValid();
+		bool IsChainValid();
 
 		Block *GetLatestBlock();
 };
