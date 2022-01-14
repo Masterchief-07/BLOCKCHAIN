@@ -25,23 +25,22 @@ Block *BlockChain::GetLatestBlock() { return &chain.back(); }
 void BlockChain::AddBlock(Transaction d)
 {
 	int index = (int)chain.size() - 1;
-	Block newBlock(index, d, GetLatestBlock()->GetHash());
-	if(newBlock.Is_Valid())
-		chain.push_back(newBlock);
+	Block newBlock{index, d, GetLatestBlock()->GetHash()};
+	chain.emplace_back(newBlock);
 }
 
 bool BlockChain::IsChainValid()
 {
-	int chainlen = (int) chain.size();
-	for(auto it = chain.begin(); it!= chain.end(); ++it)
+	int i = 0;
+	for(auto it = chain.begin(); it!= chain.end(); ++it, ++i)
 	{
-		Block currentBlock = *it;
+		Block &currentBlock = *it;
 		if(!it->Is_Valid())
 			return false;
 
-		if(chainlen>1)
+		if(i>0)
 		{
-			Block previousBlock = *(it-1);
+			Block &previousBlock = *(it-1);
 			if(currentBlock.GetPreviousHash() != previousBlock.GetHash())
 				return false;
 

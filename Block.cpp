@@ -2,8 +2,8 @@
 
 Block::Block(int _index, Transaction d, size_t prevHash):
 	index(_index),
-	data(d),
-	previousHash(prevHash)
+	previousHash(prevHash),
+	data(d)
 {
 	blockHash = GenerateHash();
 }
@@ -11,9 +11,9 @@ Block::Block(int _index, Transaction d, size_t prevHash):
 
 size_t Block::GenerateHash()
 {
-	std::hash<std::string> hash1;
-	std::hash<size_t> hash2;
-	std::hash<size_t> finalHash;
+	std::hash<std::string> hash1{};
+	std::hash<size_t> hash2{};
+	std::hash<size_t> finalHash{};
 	std::string tohash = std::to_string(data.amount) + data.receiverKey + data.senderKey + std::to_string(data.timestamp);
 
 	return finalHash( hash1(tohash) + hash2(previousHash));
