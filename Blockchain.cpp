@@ -6,29 +6,28 @@ Blockchain::Blockchain()
 	_chain.emplace_back(genesis);
 }
 
-
-void Blockchain::AddTransaction(double const& amount, User const& sender, User const& receiver)
+void Blockchain::AddTransaction(double amount, size_t const& sId, size_t const& rId)
 {
-	Transaction transact{amount, sender.GetId(), receiver.GetId()};
-	AddBlock(transact);
+	Transaction tran{amount, sId, rId};
+	this->AddBlock(tran);
 }
-
-void BlockChain::AddBlock(Transaction const& transact)
+void Blockchain::AddBlock(Transaction const& transact)
 {
 	assert(_chain.size() > 1);
-	block nblock(_chain.back()->GetHash(), transact);
+	Block nblock(_chain.back().GetHash(), transact);
 	_chain.push_back(nblock);
 }
 
 
-bool const BlockChain::VerifyChain() const
+bool const Blockchain::VerifyChain() const
 {
 	int i = 0;
-	for(auto block = chain.begin(); block != chain.end(); ++block, i++)
+	for(auto block = _chain.begin(); block != _chain.end(); ++block, i++)
 	{
-		assert(block->verifyHash());
+		assert(block->VerifyHash());
 		if(i>0)
 			assert((block-1)->GetHash() == block->GetPrevHash());
 	}
+	return true;
 }
 		
