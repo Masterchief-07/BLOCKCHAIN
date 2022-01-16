@@ -13,7 +13,7 @@ void Blockchain::AddTransaction(double amount, size_t const& sId, size_t const& 
 }
 void Blockchain::AddBlock(Transaction const& transact)
 {
-	assert(_chain.size() > 1);
+	assert(_chain.size() > 0);
 	Block nblock(_chain.back().GetHash(), transact);
 	_chain.push_back(nblock);
 }
