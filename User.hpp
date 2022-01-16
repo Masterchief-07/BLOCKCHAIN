@@ -6,13 +6,14 @@
 class User
 {
 	public:
-		User(std::string &name, double amount ,Blockchain &chain);
+		User(std::string name, double amount ,Blockchain &chain);
 		~User();
 
 		void Send(double amount, User &receiver);
 		void Receive(double amount);
 
-		void const GetAmount() const{return _amount;}
+		size_t const GetId() const {return _id;}
+		double const GetAmount() const{return _amount;}
 
 	private:
 		std::string _name;

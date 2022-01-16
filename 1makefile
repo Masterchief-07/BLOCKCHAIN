@@ -1,0 +1,22 @@
+params = -std=c++17 -Wall
+
+transaction.o: transaction.cpp
+	g++ $(params) $^ -o $@
+
+
+block.o: Block.cpp transaction.o
+	g++ -params $^ -o $@
+
+blockchain.o: Blockchain.cpp block.o
+	g++ -params $^ -o $@
+
+user.o: User.cpp blockchain.o
+	g++ -params $^ -o $@
+
+main: user.o blockchain.o
+	g++ -params $^ -O $@
+
+all : main
+
+clean:
+	rm -rf *.o main

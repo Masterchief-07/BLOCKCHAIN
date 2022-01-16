@@ -8,12 +8,12 @@ class Blockchain
 {
 	public:
 		Blockchain();
-		~BlockChain();
+		~Blockchain();
 
-		void AddTransaction(double const& amount, User const& sender, User const& receiver);
+		void AddTransaction(double amount, size_t const& sId, size_t const& rId);
 		bool const VerifyChain() const;
 
 	private:
-		vector<Block> _chain;
+		std::vector<Block> _chain;
 		void AddBlock(Transaction const& transact);
 };

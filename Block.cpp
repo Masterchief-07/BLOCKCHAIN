@@ -1,8 +1,8 @@
 #include "Block.hpp"
 
-static size_t Block::index = 0;
+size_t Block::index = 0;
 
-Block::Block(size_t cosnt& phash):_prevHash(phash),_data(0, 0 , 0)
+Block::Block(size_t const& phash):_prevHash(phash),_data(0, 0 , 0)
 {
 	index++;
 	_hash = GenerateHash();
@@ -24,5 +24,5 @@ Block::Block(size_t const& phash, double const amount, size_t const& sId, size_t
 size_t const Block::GenerateHash() const
 {
 	std::string text = std::to_string(index) + _data.ToString() + std::to_string(_prevHash);
-	return std::hash<string>{}(text);
+	return std::hash<std::string>{}(text);
 }
