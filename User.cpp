@@ -1,9 +1,8 @@
 #include "User.hpp"
 
 
-User::User(std::string name, double amount ,Blockchain &chain):_name(name), _amount(amount)
+User::User(std::string name, double amount ,Blockchain *block):_name(name), _amount(amount), _chain(block) 
 {
-	_chain = &chain;
 	std::time_t ti = time(0);
 	_id = std::hash<std::string>{}(name + std::to_string(ti));
 }
@@ -11,7 +10,7 @@ User::User(std::string name, double amount ,Blockchain &chain):_name(name), _amo
 
 User::~User()
 {
-	delete _chain;
+	//delete _chain;
 }
 
 void User::Send(double amount, User &receiver)

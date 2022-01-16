@@ -8,7 +8,6 @@ class Blockchain
 {
 	public:
 		Blockchain();
-		~Blockchain();
 
 		void AddTransaction(double amount, size_t const& sId, size_t const& rId);
 		bool const VerifyChain() const;

@@ -13,7 +13,6 @@ class Block
 		size_t const GetHash() const {return _hash;}
 		size_t const GetPrevHash() const { return _prevHash;}
 		bool const VerifyHash() const { return GenerateHash() == _hash;}
-		~Block();
 
 	private:
 		static size_t index;

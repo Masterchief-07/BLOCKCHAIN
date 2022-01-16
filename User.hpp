@@ -6,7 +6,7 @@
 class User
 {
 	public:
-		User(std::string name, double amount ,Blockchain &chain);
+		User(std::string name, double amount ,Blockchain *chain);
 		~User();
 
 		void Send(double amount, User &receiver);
